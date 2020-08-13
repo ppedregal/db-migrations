@@ -47,9 +47,9 @@ Se pueden incorporar migraciones complejas si se quiere mediante codigo java imp
 Scripts versionables ``V{VERSION}__{DESCRIPCION}.sql``
 
 * solo se ejecutan si la version se incrementa  
-* se controla que la base de datos este en la versión esperada comprobando el checksum de los scripts
+* se controla que la base de datos este en la versión esperada comprobando el checksum de los scripts previamente ejecutados
 
-Scripts repetibles ``R_{descripcion}.sql``
+Scripts repetibles ``R__{descripcion}.sql``
 
 * se ejecutan siempre que el checksum cambie
 
