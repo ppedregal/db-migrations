@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - changeSet:
+      id: V7__create_table_table1
+      author: vass
+      changes:
+      - createTable:
+          tableName: TABLE1
+          columns:
+          - column:
+              name: ID
+              type: BIGINT
+              constraints:
+                primaryKey: true
+          - column:
+              name: NAME
+              type: VARCHAR(255)

@@ -1,7 +1,10 @@
 
 spring:
-    datasource:
-        platform: h2
-        url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE
-        username: sa        
-        driver-class-name: org.h2.Driver
+  datasource:
+    platform: h2
+    url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS LIQUIBASE;
+    username: sa        
+    driver-class-name: org.h2.Driver
+  liquibase:
+    default-schema: LIQUIBASE
+        

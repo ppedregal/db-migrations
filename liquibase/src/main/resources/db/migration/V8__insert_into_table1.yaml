@@ -1,0 +1,23 @@
+databaseChangeLog:
+- changeSet:
+    id: V8__insert_into_table1
+    author: vass
+    changes:
+    - insert:
+        tableName: TABLE1
+        columns:
+        - column:
+            name: ID
+            value: 1
+        - column:
+            name: NAME
+            value: NOMBRE 1
+    - insert:
+        tableName: TABLE1
+        columns:
+        - column:
+            name: ID
+            value: 2
+        - column:
+            name: NAME
+            value: NOMBRE 2

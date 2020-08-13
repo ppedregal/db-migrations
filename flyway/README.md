@@ -38,7 +38,7 @@ Añadir dependencia maven:
 
 Los scripts de migraciones se deben ubicar por defecto en ``db/migration`` y deben seguir la nomenclatura establecida por [flyway](https://flywaydb.org/documentation/migrations#naming)
 
-Se puede cambiar la configuracion por defecto desde cualquier origen de configuracion de spring, utilizando las propiedades con prefijo spring.flyway, las propiedades configurables estan definidas en el bean [FlywayProperties](https://docs.spring.io/spring-boot/docs/current/api/org/springframework/boot/autoconfigure/flyway/FlywayProperties.html)
+Se puede cambiar la configuracion por defecto desde cualquier origen de configuracion de spring, utilizando las propiedades con prefijo spring.flyway, las propiedades configurables estan definidas en el bean [FlywayProperties](https://raw.githubusercontent.com/spring-projects/spring-boot/master/spring-boot-project/spring-boot-autoconfigure/src/main/java/org/springframework/boot/autoconfigure/flyway/FlywayProperties.java)
 
 Se pueden incorporar migraciones complejas si se quiere mediante codigo java implementando una interfaz: [JavaMigration](https://flywaydb.org/documentation/api/javadoc/org/flywaydb/core/api/migration/JavaMigration)
 

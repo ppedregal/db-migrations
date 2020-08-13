@@ -1,0 +1,7 @@
+databaseChangeLog:
+- changeSet:
+    id: V9__drop_table_table1
+    author: vass
+    changes:
+    - dropTable:
+        tableName: TABLE1

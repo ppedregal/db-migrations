@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"  
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"  
+    xsi:schemaLocation="
+        http://www.liquibase.org/xml/ns/dbchangelog 
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+        http://www.liquibase.org/xml/ns/dbchangelog-ext 
+            http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+    "
+>
+
+    <changeSet id="V5__insert_into_table1" author="vass">
+        <insert tableName="TABLE1">
+            <column name="ID" value="1"/>
+            <column name="NAME" value="NOMBRE 1"/>
+        </insert>
+        <insert tableName="TABLE1">
+            <column name="ID" value="2"/>
+            <column name="NAME" value="NOMBRE 2"/>
+        </insert>
+    </changeSet>
+
+</databaseChangeLog>
