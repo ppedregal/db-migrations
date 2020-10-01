@@ -47,9 +47,76 @@ Los changesets se pueden especificar en distintos lenguajes: sql, xml, json, yam
 Los changesets sql no tienen nada especial son simples scripts sql que se ejecutan y se controlan los cambios mediante checksums, es necesario crear el script de rollback manualmente.
 Los changesets no sql definen una estructura de cambios compleja, de la cual se deriva el sql del cambio y el del rollback cuando es posible.
 
+# Alters
+Debemos tener presentes que los changesets se aplicaran en orden incremental siempre que no se haya ejecutado anteriormente por tanto esperan encontrar la base de datos en un estado concreto o si no el script fallara necesariamente impidiendo que se aplique la migracion.
+Por ello el orden de los distintos scripts es relevante y aplican las mismas normas que con sql basico, por ejemplo si queremos realizar un alter sobre una tabla esta debe existir previamente, etc.
+
+# Baselines
+En liquibase no existe el concepto de baseline, todo se gestiona con changelogs, un changelog que refleje el estado de la base de datos debe crearse previo a utilizar las migraciones con liquibase, liquibase proporciona un comando "generateChangelog" que permite la generacion automatica de estos changelogs.
+```
+liquibase --changeLogFile=dbchangelog.xml generateChangeLog
+```
+Una vez que este changelog inicial se ha generado se aplican la operativa normal de liquibase aplicando los distintos changesets de forma incremental y activando las migraciones.
+
+Del mismo modo si en algun momento queremos resetear el uso de liquibase y generar distintos snapshots del estado de la bd se puede utilizar este comando para que nos genere distintas lineas base.
+
+# Rollbacks
+En liquibase se pueden generar scripts de rollback automaticamente que pueden aplicarse para deshacer un cambio que se hara realizado previamente.
+Los scripts de rollback ademas de ser generados automaticamente tambien pueden ser creados manualmente y liquibase se encargaria de aplicar uno u otro para retroceder la base de datos a una determinada version, no obstante para utilizar esta funcionalidad debe recordarse que estas versiones tienen que ser todas controladas mediante liquibase.
+
+```
+<changeSet id="test_rollback" author="vass">
+    <createTable tableName="liquibase_tutorial">
+        <column name="id" type="int"/>
+        <column name="nombre" type="varchar(36)"/>
+        <column name="descripion" type="varchar(36)"/>
+    </createTable>
+    <rollback>
+        <dropTable tableName="liquibase_tutorial"/>
+    </rollback>
+</changeSet>
+```
+Sobre el ejemplo anterior podriamos omitir el tag ``<rollback>`` ya que seria generado automaticamente.
+
+Una vez tenemos generados los rollbacks podemos aplicarlos utilizando el comando especifico de rollbackindicando una version, fecha o numero de rollbacks a aplicar:
+
+rollback a tag:
+```
+mvn liquibase:rollback "-Dliquibase.rollbackTag=1.0"
+```
+
+rollback a fecha:
+```
+mvn liquibase:rollback "-Dliquibase.rollbackDate=Jun 03, 2017"
+```
+
+rollback a numero:
+```
+mvn liquibase:rollback "-Dliquibase.rollbackCount=2"
+```
+
+generar sql rollbacks:
+```
+mvn liquibase:rollbacksql 
+```
+
+La integracion con spring boot no aplica automaticamente los rollbacks unicamente las migraciones, no obstante se puede configurar el plugin de maven para utilizar los comandos anteriores y generar los ficheros de rollback y/o aplicarlos, la generacion del fichero de rollback puede realizarse automaticamente desde la integracion con springboot mediante la propiedad ``spring.liquibase.rollback-file``
+
+```
+<plugin>  
+    <groupId>org.liquibase</groupId>  
+    <artifactId>liquibase-maven-plugin</artifactId>  
+    <configuration>  
+    <propertyFileWillOverride>true</propertyFileWillOverride>  
+    <propertyFile>liquibase.properties</propertyFile>  
+    </configuration>  
+</plugin>  
+```
+
 # Referencias
 * https://www.liquibase.org/
 * https://www.baeldung.com/liquibase-refactor-schema-of-java-app
+* https://www.baeldung.com/liquibase-rollback
 * https://reflectoring.io/database-migration-spring-boot-liquibase/
 * https://www.adictosaltrabajo.com/2010/09/10/liquibase/
 

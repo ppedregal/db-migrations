@@ -7,4 +7,8 @@ spring:
     driver-class-name: org.h2.Driver
   liquibase:
     default-schema: LIQUIBASE
+    change-log: classpath:/db/changelog/db.changelog-master-xml.xml
+    
+      
+      
         
