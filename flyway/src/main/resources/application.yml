@@ -6,6 +6,6 @@ spring:
         username: sa        
         driver-class-name: org.h2.Driver
     flyway:
-        default-schema: FLYWAY
+        default-schema: FLYWAY        
         schemas: 
         - FLYWAY

@@ -53,6 +53,19 @@ Scripts repetibles ``R__{descripcion}.sql``
 
 * se ejecutan siempre que el checksum cambie
 
+# Alters
+Debemos tener presentes que los scripts se aplicaran en orden incremental siempre que no se haya ejecutado anteriormente por tanto esperan encontrar la base de datos en un estado concreto o si no el script fallara necesariamente impidiendo que se aplique la migracion, por ejemplo si queremos realizar un alter sobre una tabla esta debe existir previamente, etc.
+
+# Baselines
+En flyway se puede establecer una linea base facilmente y comenzar a utilizar los scripts de migraciones desde un punto concreto, pudiendo mezclar migraciones manuales con automaticas a partir de un determinado baseline.
+En la integracion con spring boot se deberia utilizar las propiedades: ``spring.flyway.baseline-on-migrate`` y ``spring.flyway.baseline-version`` las cuales marcarian el estado actual como baseline con una determinada version apartir de la cual se aplicarian las distintas migraciones manualmente.
+
+# Rollbacks
+En flyway los rollbacks deben ser codificados manualmente, y pueden aplicarse automaticamente si se dispone de una licencia ya que es una caracteristica de la version comercial.
+
+# Otras consideraciones
+Para las operativas no estandar de aplicar las migraciones automaticamente se recomienda utilizar no obstante la linea de comandos o el plugin de maven.
+
 # Referencias
 * https://flywaydb.org/
 * https://www.baeldung.com/database-migrations-with-flyway
