@@ -1,12 +1,16 @@
+app:
+  default-schema: LIQUIBASE
 
 spring:
   datasource:
     platform: h2
-    url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS LIQUIBASE;
+    url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;SCHEMA="${app.default-schema}"
     username: sa        
     driver-class-name: org.h2.Driver
   liquibase:
-    default-schema: LIQUIBASE
+    default-schema: ${app.default-schema}    
+    url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS "${app.default-schema}";
+    user: ${spring.datasource.username}
     change-log: classpath:/db/changelog/db.changelog-master-xml.xml
     
       
