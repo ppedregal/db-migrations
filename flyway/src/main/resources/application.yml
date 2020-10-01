@@ -1,11 +1,16 @@
+app:
+  schema: FLYWAY
+  database: file:~/.h2/demo
 
 spring:
     datasource:
         platform: h2
-        url: jdbc:h2:file:~/.h2/demo;DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;
+        url: jdbc:h2:${app.database};DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;SCHEMA="${app.schema}";
         username: sa        
         driver-class-name: org.h2.Driver
     flyway:
-        default-schema: FLYWAY        
+        default-schema: ${app.schema}
+        url: jdbc:h2:${app.database};DB_CLOSE_ON_EXIT=FALSE;AUTO_SERVER=TRUE;INIT=CREATE SCHEMA IF NOT EXISTS "${app.schema}";
+        user: sa
         schemas: 
-        - FLYWAY
+        - ${app.schema}

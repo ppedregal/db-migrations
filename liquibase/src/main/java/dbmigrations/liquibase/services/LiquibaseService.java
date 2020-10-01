@@ -6,8 +6,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import dbmigrations.liquibase.domain.model.DatabaseChangelog;
-import dbmigrations.liquibase.domain.model.DatabaseChangelogLock;
+import dbmigrations.liquibase.domain.models.DatabaseChangelog;
+import dbmigrations.liquibase.domain.models.DatabaseChangelogLock;
 import dbmigrations.liquibase.domain.repositories.DatabaseChangelogLockRepository;
 import dbmigrations.liquibase.domain.repositories.DatabaseChangelogRepository;
 

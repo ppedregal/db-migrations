@@ -1,4 +1,4 @@
-package dbmigrations.liquibase.domain.model;
+package dbmigrations.liquibase.domain.models;
 
 import java.util.Date;
 
